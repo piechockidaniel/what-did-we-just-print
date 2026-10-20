@@ -1,0 +1,15 @@
+.git
+.env*
+node_modules
+.venv
+data
+local-backups
+archives
+assets
+chats
+.openai
+.playwright-cli
+output
+dist
+__pycache__
+*.pyc

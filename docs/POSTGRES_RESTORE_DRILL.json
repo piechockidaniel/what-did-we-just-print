@@ -1,0 +1,13 @@
+{
+  "database": "PostgreSQL 17",
+  "dataset": "synthetic only",
+  "restoredInto": "separate database and private-storage directory",
+  "orders": 1,
+  "allocations": 1,
+  "packed": 37,
+  "remaining": 63,
+  "artworkRead": true,
+  "catalogExport": true,
+  "packingHistory": true,
+  "productionRecoveryClaim": false
+}

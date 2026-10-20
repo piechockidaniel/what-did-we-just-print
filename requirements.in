@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg[binary]
+pillow
+opencv-python-headless
+numpy
+pytest
+httpx

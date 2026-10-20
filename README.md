@@ -1,40 +1,53 @@
 # What Did We Just Print, Man?
 
-Visual identity for offset-printing orders after sheet cutting. The interface follows the supplied dark print-floor design: orange controls, a job ticket, registration marks and a reference-sheet grid. The 24 empty slots are decorative placeholders, not production imposition or a limit on saved references. Production lifecycle stages are documented but not implemented.
+A web workspace for restoring cut print-job identity through reference artwork, active production sheets, candidate review and audited packing. Built with Vite and plain JavaScript, a Python/FastAPI API, SQLAlchemy and an OpenCV 5 feature worker. The UI retains the dark print-floor design, orange controls, registration marks and CMYK accents. The empty 24-slot reference grid is decorative.
 
-See [the concept document](docs/CONCEPT.md) for sheet composition, active production boundaries, cached matching, ranked evidence, limitations and the next implementation slice.
+## Run locally
 
-## Development (Vite + JavaScript)
-
-Run these commands from `H:\Active Solutions\what did we just print`:
+From `H:\Active Solutions\what did we just print`:
 
 ```powershell
+uv venv .venv
+uv pip install --python .venv\Scripts\python.exe -r requirements.txt
 npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. Use the same address every time: browser data belongs to an origin (scheme, host and port). Existing hosted catalog records do not automatically appear on localhost. The IndexedDB database name and schema remain unchanged.
+Open http://127.0.0.1:5173/. One command starts the API (8000), feature worker and Vite (5173), all for local development. The banner explicitly identifies the automatic local developer identity. Do not expose this development mode to a network. Existing browser-only records can be imported with a preview; they are never cleared automatically.
 
 ```powershell
 npm run check
+npm run test:api
 npm run build
-npm run preview
 ```
 
-Production output is generated in `dist/`; preview runs at http://127.0.0.1:4173. Edit `index.html`, `src/main.js` and `src/style.css`, rather than generated files. Vite settings are in `vite.config.js` and dependency versions are locked in `package-lock.json`. The original static prototype is preserved in `archives/prototype-before-vite/`.
+## Implemented local workflow
 
-## Repository handoff
+- Intake orders with original PNG/JPEG/WebP artwork, quantities, destinations and stable UUIDs. Recover unsaved intake drafts after reload where browser storage is available.
+- Shared server persistence across browser sessions; PostgreSQL support and a SQLite local fallback. Originals use private content-addressed storage.
+- Preview/import/export the original catalog format, preserving UUIDs and images; skip identical imports and reject conflicts atomically.
+- Register production sheets with dimensions, impressions, placements, rotation and sides. Validate bounds/overlaps and explicitly release allocations.
+- Track partial packing, remaining quantities, completion, reprints, cancellations, reversals and audit history. Revision checks and idempotency keys protect concurrent and repeated requests.
+- Capture through a browser camera or upload a photo; optionally supply four corners for perspective correction. Configure station size classes and restrict searches to a production sheet.
+- Inspect artwork history and upload revisions as a supervisor. Saved compositions and allocations keep their original artwork; new placements can select a specific revision.
+- The selected first physical pilot uses a phone camera and business cards. Rear-camera capture is requested where supported; see the runbook for HTTPS access and physical evaluation requirements.
+- Prepare/cache ORB descriptors in a separate durable worker. Compare with Hamming distance and geometric verification, showing ranked candidates, inlier counts/ratios and point evidence.
+- Require operator identification review and a separate packing quantity confirmation. Shared artwork remains ambiguous; stale scans are rejected when the active pool changes.
+- Named-user sessions outside development, supervisor controls, checksummed SQLite backup/restore and a container deployment configuration.
 
-Include `index.html`, `src/`, `package.json`, `package-lock.json`, `vite.config.js`, `.gitignore`, `README.md` and `docs/` in the source repository. Build with `npm ci` and `npm run build`; publish the generated `dist/` folder. Keep `.openai/hosting.json` if continuing the existing private Sites deployment. Do not copy `.git/`, credentials, packaging archives or customer data. No external repository has been created for this handoff.
+## Validation boundaries
 
-## Implemented prototype
+This is a local pilot implementation. Synthetic API/browser checks establish workflow behavior, not real-print recognition accuracy. The matcher always requires review; ratios are not probabilities. Near-identical-name discrimination, OCR, automatic product boundaries, physical camera calibration, adaptive zoom and whole-stack validation are not established. Linked duplex products, upstream MIS/ERP integration, production-scale indexing/pagination, monitoring/retention policy and final deployment need further work and owner input.
 
-Simplified business-card order intake and scanning reference catalog. Open the hosted interface or serve `dist` using `python -m http.server 8080 --directory dist` and visit http://localhost:8080.
+The previous private Sites deployment remains the historical browser-only prototype. A static `dist/` upload alone cannot run the new shared workflow: deploy the API and worker as described in the runbook. No production publishing, DNS changes or cloud spending were performed.
 
-Create an order, upload one final-trim front image per variant, and enter its name, quantity and destination. PNG/JPEG/WebP uploads are decoded before acceptance. Each order and variant gets a UUID. The catalog supports search and exports JSON containing original image data URLs, pixel dimensions, physical dimensions, destination and quantity.
+## Documentation
 
-Records persist in IndexedDB in the current browser and origin. This is a single-browser prototype, without shared storage, authentication for customer intake, payment, camera capture, OCR or recognition. Export backups before clearing browser data. Private hosting controls access to the interface; it does not synchronize records between devices.
+- [Runbook](docs/RUNBOOK.md): startup, migration, sheet JSON, authentication, backup/restore, deployment and evaluation.
+- [Implementation status](docs/IMPLEMENTATION_STATUS.md): verified evidence and remaining release gates.
+- [Final solution plan](docs/FINAL_SOLUTION_PLAN.md): agreed direction, phases, decisions and acceptance criteria.
+- [Concept](docs/CONCEPT.md): original production lifecycle and recognition requirements.
+- [API contracts](docs/API.md): workflow endpoints and concurrency rules; live OpenAPI at `/docs` on the API.
 
-For scanner integration, read `orders[].variants[]` from the exported catalog. Use the variant UUID as the identity key. Images are reference artwork rather than camera captures; visually identical references must be treated as ambiguous. Dimensions are user-entered and have not been independently verified. Use synthetic or authorized artwork for testing.
-
+Edit `src/`, `server/` and `vision/`; `dist/` is generated. Dependency versions are recorded in `package-lock.json` and `requirements.txt`. The original static prototype is retained in `archives/prototype-before-vite/`. Keep private data, local settings, customer artwork and credentials outside source control.
 

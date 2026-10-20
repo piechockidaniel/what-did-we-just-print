@@ -1,0 +1,243 @@
+[hidden] {
+  display: none !important;
+}
+.tabs,
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.tabs {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+}
+.tab {
+  background: none;
+  border: 1px solid var(--line);
+  padding: 14px 20px;
+  color: var(--muted);
+  font: 12px monospace;
+}
+.tab[aria-current="page"] {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.connection {
+  font: 12px monospace;
+  color: #bdd4ab;
+}
+.connection.offline {
+  color: #ffb9a1;
+}
+.toolbar .secondary {
+  padding: 12px;
+  font-size: 10px;
+}
+.surface,
+.import-panel {
+  padding: 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  margin: 24px 0;
+}
+.surface h2 {
+  margin-bottom: 22px;
+}
+.surface p,
+.view > p {
+  font: 13px/1.7 monospace;
+  color: var(--muted);
+}
+.workflow-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+.workflow-columns .surface {
+  min-width: 0;
+}
+.work-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.work-item h3 {
+  overflow-wrap: anywhere;
+}
+.work-item .secondary {
+  margin: 12px 0;
+}
+.work-item details {
+  margin-top: 20px;
+}
+summary {
+  cursor: pointer;
+  color: var(--orange);
+  font: 12px/1.6 monospace;
+}
+select,
+textarea {
+  width: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font: 14px monospace;
+  padding: 12px;
+  margin-top: 12px;
+}
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.packing-form,
+.reason-form {
+  margin-top: 20px;
+  max-width: 500px;
+}
+.metrics {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+.metrics > div {
+  display: grid;
+  gap: 8px;
+}
+.metrics strong {
+  font-size: 36px;
+  color: var(--orange);
+}
+.metrics span {
+  font: 11px monospace;
+  color: var(--muted);
+}
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: 12px/1.6 monospace;
+}
+.composition {
+  position: relative;
+  border: 1px solid var(--orange);
+  background: #ded8ce;
+  max-height: 380px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+.composition img {
+  position: absolute;
+  object-fit: contain;
+  border: 1px solid #333;
+}
+.composition-placement {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+.revision-preview {
+  width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+}
+.artwork-revision-editor {
+  padding-top: 20px;
+}
+.details details {
+  margin-top: 20px;
+}
+.placement-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font: 12px monospace;
+}
+.station-video,
+.scan-preview {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  background: #080808;
+}
+.scan-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.scan-candidate {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 20px;
+}
+.scan-candidate img {
+  max-width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+.scan-candidate p {
+  font: 12px/1.7 monospace;
+  overflow-wrap: anywhere;
+}
+.scan-candidate canvas {
+  width: 100%;
+  height: auto;
+}
+.station-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.station-status {
+  border-left: 3px solid var(--orange);
+  padding: 18px;
+  margin: 20px 0;
+  font: 14px/1.7 monospace;
+}
+dialog {
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--orange);
+  padding: 30px;
+  max-width: 440px;
+  width: 90%;
+}
+dialog::backdrop {
+  background: #000b;
+}
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.8;
+}
+.checkbox-label input {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+dialog h2 {
+  margin-bottom: 24px;
+}
+@media (max-width: 900px) {
+  .workflow-columns {
+    grid-template-columns: 1fr;
+  }
+  .surface {
+    padding: 18px;
+  }
+  .toolbar {
+    gap: 8px;
+  }
+  .tabs {
+    gap: 6px;
+  }
+  .tab {
+    padding: 12px;
+    font-size: 11px;
+  }
+  .scan-results {
+    grid-template-columns: 1fr;
+  }
+}

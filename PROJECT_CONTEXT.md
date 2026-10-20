@@ -19,10 +19,14 @@
 - Data is stored locally in the browser; export a backup before clearing browser data.
 - Camera recognition is not included yet.
 
+## Current implementation update — 20 October 2026
+
+The bullets above describe the historical intake prototype. The local Vite app now has a Python shared API, sheet/allocation workflow, audited packing and reversals, catalog migration, browser camera/upload capture, and an experimental OpenCV 5 ranked matcher with separate operator review. Search in the original prototype was text search, not scanning. See `docs/IMPLEMENTATION_STATUS.md` for current evidence and unfinished physical/production gates; the older hosted Sites app was not updated by this work.
+
 ## Current known implementation
 
 - The project exists as the **Print Reference Desk** prototype.
-- It is available at: https://print-reference-desk-x20.daniel-interklub.chatgpt.site
+- It is available at: 
 
 ## Conversation handoff note
 

@@ -4,10 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/dev.mjs",
+    "dev:ui": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "node --check src/main.js && node --check vite.config.js"
+    "api": "powershell -NoProfile -File scripts/dev-api.ps1",
+    "worker": "node scripts/python.mjs -m server.worker",
+    "test:api": "node scripts/python.mjs -m pytest tests -q",
+    "check": "node --check src/main.js && node --check src/api.js && node --check src/workflow.js && node --check src/station.js && node --check vite.config.js"
   },
   "devDependencies": {
     "vite": "8.3.4"

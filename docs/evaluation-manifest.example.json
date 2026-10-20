@@ -1,0 +1,21 @@
+{
+  "split": "held-out",
+  "captureSession": "replace-with-actual-date-station-session",
+  "cases": [
+    {
+      "file": "captures/physical-card-001.jpg",
+      "acceptableVariantIds": ["replace-with-actual-variant-uuid"],
+      "expected": "known"
+    },
+    {
+      "file": "captures/unknown-card.jpg",
+      "acceptableVariantIds": [],
+      "expected": "unknown"
+    },
+    {
+      "file": "captures/shared-artwork.jpg",
+      "acceptableVariantIds": ["variant-a", "variant-b"],
+      "expected": "ambiguous"
+    }
+  ]
+}

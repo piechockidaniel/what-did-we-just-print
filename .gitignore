@@ -4,3 +4,12 @@ dist/
 .env.*
 !.env.example
 *.local
+.venv/
+__pycache__/
+.pytest_cache/
+data/
+local-backups/
+test-results/
+playwright-report/
+.playwright-cli/
+output/playwright/
